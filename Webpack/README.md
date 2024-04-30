@@ -5,9 +5,9 @@
 <p><strong>Read or watch</strong>:</p>
 
 <ul>
-<li><a href="/rltoken/j_Eo1Fx5ddlAk_8R4YK95g" title="Webpack documentation" target="_blank">Webpack documentation</a></li>
-<li><a href="/rltoken/6ddGUw-ILl5oTqDoc-uzTg" title="Webpack beginner guide" target="_blank">Webpack beginner guide</a></li>
-<li><a href="/rltoken/vbLU_yBRAvppEHxSnWla0g" title="npm-package.json" target="_blank">npm-package.json</a></li>
+<li><a href="https://webpack.js.org/concepts/" title="Webpack documentation" target="_blank">Webpack documentation</a></li>
+<li><a href="https://www.sitepoint.com/webpack-beginner-guide/" title="Webpack beginner guide" target="_blank">Webpack beginner guide</a></li>
+<li><a href="https://docs.npmjs.com/cli/v10/configuring-npm/package-json" title="npm-package.json" target="_blank">npm-package.json</a></li>
 </ul>
 
 <h2>Learning Objectives</h2>
