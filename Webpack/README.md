@@ -16,7 +16,19 @@
 
 <ul>
 <li>How to setup Webpack for a basic project</li>
-<li>Entry points, output, and loaders</li>
+
+<br><code>npm install webpack webpack-cli --save-dev </code>
+<br><code> npm install jquery</code>
+<br><code> npm install lodash</code>
+
+<li>Entry points, output, and loaders:</li>
+
+<br>-<b>Entry:</b> the entry point is the module that webpack uses to start building its internal dependency graph. From there, it determines which other modules and libraries that entry point depends on (directly and indirectly) and includes them in the graph until no dependency is left. By default, the entry property is set to ./src/index.js, but we can specify a different module (or even multiple modules) in the webpack configuration file.
+<br>-<b>Output:</b> the output property instructs webpack where to emit the bundle(s) and what name to use for the file(s). The default value for this property is ./dist/main.js for the main bundle and ./dist for other generated files — such as images, for example. Of course, we can specify different values in the configuration depending on our needs.
+<br>-<b>Loaders:</b> by default, webpack only understands JavaScript and JSON files. To process other types of files and convert them into valid modules, webpack uses loaders. Loaders transform the source code of non-JavaScript modules, allowing us to preprocess those files before they’re added to the dependency graph. For example, a loader can transform files from a CoffeeScript language to JavaScript or inline images to data URLs. With loaders we can even import CSS files directly from our JavaScript modules.
+<br>-<b>Plugins:</b> plugins are used for any other task that loaders can’t do. They provide us with a wide range of solutions about asset management, bundle minimization and optimization, and so on.
+<br>-<b>Mode:</b> typically, when we develop our application we work with two types of source code — one for the development build and one for the production build. Webpack allows us to set which one we want to be produced by changing the mode parameter to development, production or none. This allows webpack to use built-in optimizations corresponding to each environment. The default value is production. The none mode means that no default optimization options will be used. To learn more about the options webpack uses in development and production mode, visit the mode configuration page.
+
 <li>How to add plugins</li>
 <li>How to split your code into chunks</li>
 <li>How to setup a dev server</li>
