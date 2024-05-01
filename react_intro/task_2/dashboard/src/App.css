@@ -34,8 +34,13 @@
 }
 
 .App-body {
-  margin: 5rem;
+  margin: 50px;
   align-items: left;
+  min-height: 100vh;
+}
+
+.App-body input {
+  margin: 1rem;
 }
 
 .App-footer {
@@ -46,6 +51,6 @@
   justify-content: center;
   position: fixed;
   font-style: italic;
-  bottom: 0; /**/
+  bottom: 0;
 }
 
