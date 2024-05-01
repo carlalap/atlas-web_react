@@ -1,4 +1,4 @@
-import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
+import { getFullYear, getFooterCopy, getLatestNotification } from '../../../task_3.1/dashboard/src/utils';
 
 // test to check that the function getFullYear returns the correct year
 test('getFullYear returns the current year', () => {
@@ -7,11 +7,11 @@ test('getFullYear returns the current year', () => {
 
 // test to check that getFooterCopy returns the correct string when the argument is true or false
 test('getFooterCopy returns correct string when argument is True', () => {
-    expect(getFooterCopy()).toBe("Atlas School");
+    expect(getFooterCopy(true)).toBe("Holberton School");
 });
 
 test('getFooterCopy returns string when argument is False', () => {
-    expect(getFooterCopy()).toBe("Holberton School");
+    expect(getFooterCopy(false)).toBe("Holberton School main dashboard");
 });
 
 // test checking the returned string for getLatestNotification
