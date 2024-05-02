@@ -5,7 +5,7 @@ export function getFullYear() {
 }
 
 export function getFooterCopy(isIndex) {
-    if (isIndex) return "Holberton School"
+    if (isIndex) return "Atlas School"
     return "Holberton School main dashboard"
 }
 

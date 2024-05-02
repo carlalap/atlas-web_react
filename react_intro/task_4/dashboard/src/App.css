@@ -7,7 +7,7 @@
 }
 
 .App-logo {
-  width: 100px;
+  width: 200px;
   height: 100px;
   margin-right: 1px;
   pointer-events: none;
@@ -23,13 +23,13 @@
   min-height: 25vh;
   display: flex;
   align-items: center;
-  border-bottom: 3px #eb1954 solid;
+  border-bottom: 3px #19a5eb solid;
 }
 
 .App-header h1 {
   margin-left: 5px;
 	font-size: calc(10px + 2vmin);
-  color: #eb1954;
+  color: #3258e3ea;
   display: inline;
 }
 
@@ -45,7 +45,7 @@
 
 .App-footer {
   min-height: 5vh;
-  border-top: 3px #eb1954 solid;
+  border-top: 3px #19a5eb solid;
   width: 100%;
   display: flex;
   justify-content: center;
