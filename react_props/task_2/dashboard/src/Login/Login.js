@@ -4,15 +4,14 @@ import './Login.css';
 function Login(){
   return (
     <React.Fragment>
-        <body className="App-body">
+          <div className="App-body">
             <p>Login to access the full dashboard</p>
-            {/* https://reactjs.org/docs/dom-elements.html */}
             <label htmlFor="email">Email: </label>
-            <input type="email" id="email" />
-            <label htmlFor="psw">Password: </label>
-            <input type="password" id="psw" />
+            <input type="email" id="email" name="email" />
+            <label htmlFor="password">Password</label>
+            <input type="password" id="password" name="password"/>
             <button>OK</button>
-        </body>
+          </div>
     </React.Fragment>
   )
 }

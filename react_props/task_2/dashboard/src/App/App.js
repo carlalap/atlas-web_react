@@ -8,7 +8,7 @@ import Notifications from '../Notifications/Notifications'
 function App() {
   return (
     <React.Fragment>
-      <Notifications></Notifications>
+      <Notifications />
       <div className='App'>
         <Header></Header>
         <Login></Login>
