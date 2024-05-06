@@ -1,0 +1,30 @@
+:root {
+    --main-color: #FFF;
+  }
+  
+  .App-logo {
+    width: 200px;
+    height: 100px;
+    margin-right: 1px;
+    pointer-events: none;
+  } 
+  
+  @media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+    }
+  }
+  
+  .App-header {
+    min-height: 25vh;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px #19a5eb solid;
+  }
+  
+  .App-header h1 {
+    margin-left: 5px;
+      font-size: calc(10px + 2vmin);
+    color: #3258e3ea;
+    display: inline;
+  }
