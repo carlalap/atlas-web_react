@@ -1,0 +1,11 @@
+.App-footer {
+    min-height: 5vh;
+    border-top: 3px #19a5eb solid;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    font-style: italic;
+    bottom: 0;
+  }
+  
