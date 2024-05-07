@@ -41,10 +41,8 @@
 </div>
 
 <h2 class="gap">Tasks</h2>
-
     <div data-role="task19288" data-position="1" id="task-num-0">
       <div class="panel panel-default task-card " id="task-19288">
-
 <span id="user_id" data-id="6138"></span>
 
   <div class="panel-heading panel-heading-actions">
@@ -620,7 +618,6 @@
             <li>File: <code>task_5/dashboard/src/Notifications/Notifications.test.js</code></li>
         </ul>
       </div>
-
     <!-- Self-paced manual review -->
 
   </div>
