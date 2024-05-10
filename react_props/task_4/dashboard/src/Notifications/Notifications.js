@@ -10,7 +10,7 @@ function Notifications({ displayDrawer }) {
   return (
           <React.Fragment>
             
-            <div className="NotiItem"><p>Your notifications</p></div>
+            <div className="menuItem"><p>Your notifications</p></div>
             <div className={`Notifications${displayDrawer ? ' show' : ''}`} style={{ position: 'relative' }}>
               <p>Here is the list of notifications</p>
 
