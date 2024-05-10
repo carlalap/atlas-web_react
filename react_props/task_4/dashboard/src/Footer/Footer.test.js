@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Footer from './Footer';
 
-describe('Test Footer.js', () => {
+describe('Test Footer.js component', () => {
   it('renders without crashing', () => {
     shallow(<Footer />);
   });

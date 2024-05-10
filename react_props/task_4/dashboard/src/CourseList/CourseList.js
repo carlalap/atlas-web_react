@@ -4,9 +4,7 @@ import './CourseList.css'
 
 function CourseList() {
     return (
-        <div>
-            <div class="table">
-                <table id="CourseList">
+                <table className="table" id="CourseList">
                     <thead>
                         <CourseListRow isHeader={true} textFirstCell="Available courses"/>
                         <CourseListRow isHeader={true} textFirstCell="Course name" textSecondCell="Credit"/>
@@ -17,9 +15,6 @@ function CourseList() {
                     <CourseListRow isHeader={false} textFirstCell="React" textSecondCell="40"/>
                     </tbody>
                 </table>
-            </div>
-            <div className="linea"></div>
-        </div>
     );
 }
 

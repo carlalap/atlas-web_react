@@ -1,14 +1,21 @@
 // function named getFullYear that will return the current year
-export function getFullYear() {
-    let date = new Date();
-    return date.getFullYear();
-}
+// return current year
+function getFullYear() {
+    return new Date().getFullYear();
+  }
 
-export function getFooterCopy(isIndex) {
-    if (isIndex) return "Atlas School"
-    return "Atlas School main dashboard"
-}
 
-export function getLatestNotification() {
-    return "<strong>Urgent requirement</strong> - complete by EOD"
-}
+  function getFooterCopy(isIndex) {
+    if (isIndex) {
+      return "Atlas School";
+    }
+    else {
+      return "Atlas School main dashboard";
+    }
+  }
+  
+  function getLatestNotification() {
+    return `<strong>Urgent requirement</strong> - complete by EOD`
+  }
+  
+  export { getFullYear, getFooterCopy, getLatestNotification };

@@ -1,21 +1,25 @@
 import React from 'react';
+import './App.css';
+import PropTypes from 'prop-types';
 import Header from '../Header/Header'
 import Login from '../Login/Login'
 import Footer from '../Footer/Footer'
 import Notifications from '../Notifications/Notifications'
 import CourseList from '../CourseList/CourseList';
-import PropTypes from 'prop-types';
 
 
 function App({ isLoggedIn }) {
   return (
     <React.Fragment>
-      <Notifications />
-      <div className='App'>
-        <Header></Header>
-        {/* operadtor  */}
+    <div className="App-header">
+      <Header />
+      <div className="menuNotifications">
+        <Notifications />
+      </div>
+    </div>
+      <div className="App">
         {isLoggedIn ? <CourseList /> : <Login />}
-        <Footer></Footer>
+        <Footer />
       </div>
     </React.Fragment>
   );
@@ -27,7 +31,7 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  isLoggedIn: true // (false or true) pop-ups nothing or the available courses table
+  isLoggedIn: true // (false by default (or true) pop-ups nothing or the available courses table
 };
 
 export default App;

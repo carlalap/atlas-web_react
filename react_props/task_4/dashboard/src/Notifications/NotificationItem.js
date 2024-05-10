@@ -1,10 +1,9 @@
-// NotificationItem.js
 import React from 'react';
 import './Notifications.css';
 import PropTypes from 'prop-types';
 
-const NotificationItem = ({ type = 'default', html, value }) => {
-  if (html)  {
+const NotificationItem = ({ type, html, value }) => {
+  if (html) {
     return (
       <li data-notification-type={type} dangerouslySetInnerHTML={html}/>
     );
@@ -16,7 +15,7 @@ const NotificationItem = ({ type = 'default', html, value }) => {
 
 NotificationItem.propTypes = {
   html: PropTypes.shape({
-    __html: PropTypes.string
+    __html: PropTypes.string,
   }),
   type: PropTypes.string,
   value: PropTypes.string,
