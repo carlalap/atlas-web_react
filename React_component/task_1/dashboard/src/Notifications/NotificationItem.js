@@ -1,35 +1,28 @@
-import React, { Component } from 'react'
+import React from 'react';
+import './Notifications.css';
 import PropTypes from 'prop-types';
 
-
-export default class NotificationItem extends Component {
-  static propTypes = {
-    type: PropTypes.string.isRequired,
-    value: PropTypes.string,
-    html: PropTypes.shape({
-      __html: PropTypes.string,
-    })
-  }
-
-  static defaultProps  = {
-    type: 'default'
-  }
-
-  checkhtml() {
-    if (this.props.html === undefined) {
-      return this.props.value
-    }
-    return ;
-  }
-  render() {
+const NotificationItem = ({ type, html, value }) => {
+  if (html) {
     return (
-      <>
-        <li data-notification-type={ this.props.type }
-            dangerouslySetInnerHTML={ this.props.html }
-        >
-          { this.checkhtml() }
-        </li>
-      </>
-    )
+      <li data-notification-type={type} dangerouslySetInnerHTML={html}/>
+    );
   }
-}
+  return (
+    <li data-notification-type={type}>{value}</li>
+  );
+};
+
+NotificationItem.propTypes = {
+  html: PropTypes.shape({
+    __html: PropTypes.string,
+  }),
+  type: PropTypes.string,
+  value: PropTypes.string,
+};
+
+NotificationItem.defaultProps = {
+  type: 'default',
+};
+
+export default NotificationItem;
