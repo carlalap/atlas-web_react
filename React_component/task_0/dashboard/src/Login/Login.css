@@ -2,12 +2,12 @@
   --main-color: #FFF;
 }
 
-.App-body {
-    margin: 50px;
+.App {
+    margin: 70px;
     align-items: left;
-    min-height: 100vh;
+    min-height: 60vh;
   }
   
-.App-body input {
+.App input {
     margin: 1rem;
   }
