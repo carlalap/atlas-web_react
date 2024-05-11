@@ -1,20 +1,21 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect as expect } from 'chai';
-import BodySection from './BodySection'
+import BodySection from './BodySection';
 
-describe('Test BodySection.js', () => {
-  it('Render without crashing', (done) => {
-    expect(shallow(<BodySection title='test' />).exists());
-    done();
-  });
+describe('BodySection', () => {
+  it('Check if it renders an h2 and p element with the correct data.', () => {
+    const wrapper = shallow(
+      <BodySection title="test title">
+        <p>test children node</p>
+      </BodySection>
+    );
 
-  it('render "h2" with text "test title" and "p" with text "test children node"', (done) => {
-    const wrapper = shallow(<BodySection title='test title'><p>test children node</p></BodySection>);
-    expect(wrapper.find('h2')).to.have.lengthOf(1);
-    expect(wrapper.find('h2').text()).to.equal('test title');
-    expect(wrapper.find('p')).to.have.lengthOf(1);
-    expect(wrapper.find('p').text()).to.equal('test children node');
-    done();
+    // Check the h2 element and make sure it includes the title of the test text.
+    expect(wrapper.find('h2').length).toBe(1);
+    expect(wrapper.find('h2').text()).toEqual('test title');
+
+    // Check the p element and make sure it includes the correct text.
+    expect(wrapper.find('p').length).toBe(1);
+    expect(wrapper.find('p').text()).toEqual('test children node');
   });
 });

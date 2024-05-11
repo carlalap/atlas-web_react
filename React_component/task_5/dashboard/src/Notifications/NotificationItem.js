@@ -1,26 +1,27 @@
-import React from 'react'
+// NOtificationItems file:
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class NotificationItem extends React.Component {
-  render() {
-    if (this.props.value) return (<li data-notification-type={this.props.type} onClick={() => { this.props.markAsRead(this.props.id) }}>{this.props.value}</li>);
-    else return (<li data-notification-type={this.props.type} dangerouslySetInnerHTML={this.props.html} onClick={() => { this.props.markAsRead(this.props.id) }}></li>);
+function NotificationItem({ id, type, value, html, markAsRead }) {
+  const handleClick = () => markAsRead(id);
+
+  if (html) {
+    return <li data-notification-type={type} dangerouslySetInnerHTML={html} onClick={handleClick} />;
   }
+  return <li data-notification-type={type} onClick={handleClick}>{value}</li>;
 }
 
-NotificationItem.PropTypes = {
+NotificationItem.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.string,
-  html: PropTypes.shape({ __html: PropTypes.string }),
+  html: PropTypes.shape({__html: PropTypes.string}),
   value: PropTypes.string,
   markAsRead: PropTypes.func
-}
+};
 
 NotificationItem.defaultProps = {
   type: 'default',
-  value: '',
-  html: {},
-  markAsRead: () => void(0)
-}  
+  markAsRead: () => {}
+};
 
-export default NotificationItem;
+export default React.memo(NotificationItem);
