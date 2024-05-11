@@ -1,26 +1,38 @@
-import React from 'react'
+// NotificationItem.js file 
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class NotificationItem extends React.Component {
+class NotificationItem extends Component {
+  handleClick = () => {
+    const { id, markAsRead } = this.props;
+    markAsRead(id);
+  };
+
   render() {
-    if (this.props.value) return (<li data-notification-type={this.props.type} onClick={() => { this.props.markAsRead(this.props.id) }}>{this.props.value}</li>);
-    else return (<li data-notification-type={this.props.type} dangerouslySetInnerHTML={this.props.html} onClick={() => { this.props.markAsRead(this.props.id) }}></li>);
+    const { type, html, value } = this.props;
+
+    if (html) {
+      return (
+        <li data-notification-type={type} onClick={this.handleClick} dangerouslySetInnerHTML={html}/>
+      );
+    }
+
+    return (
+      <li data-notification-type={type} onClick={this.handleClick}>{value}</li>
+    );
   }
 }
 
-NotificationItem.PropTypes = {
+NotificationItem.propTypes = {
   id: PropTypes.number.isRequired,
   type: PropTypes.string,
   html: PropTypes.shape({ __html: PropTypes.string }),
   value: PropTypes.string,
-  markAsRead: PropTypes.func
-}
+  markAsRead: PropTypes.func,
+};
 
 NotificationItem.defaultProps = {
   type: 'default',
-  value: '',
-  html: {},
-  markAsRead: () => void(0)
-}  
+};
 
 export default NotificationItem;

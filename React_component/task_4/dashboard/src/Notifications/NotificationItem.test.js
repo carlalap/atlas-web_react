@@ -1,36 +1,44 @@
+// NotificationItem.test.js
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import { expect as expectChai } from 'chai';
 import NotificationItem from './NotificationItem';
 
-describe('test NotificationItem.js', () => {
-  it('NotificacionItem without crashing', (done) => {
-    expectChai(shallow(<NotificationItem id={1}/>).exists());
-    done();
+describe('NotificationItem Component', () => {
+  let mockMarkAsRead;
+  const id = 1;
+  const type = 'default';
+  const value = 'Test Notification';
+
+  beforeEach(() => {
+    mockMarkAsRead = jest.fn();
   });
 
-  it('renders three list items', (done) => {
-    const wrapper = shallow(<NotificationItem type='default' value='test' id={1} />);
-    
-    expectChai(wrapper.find('li')).to.have.lengthOf(1);
-    expectChai(wrapper.find('li').props()).to.have.property('data-notification-type', 'default');
-    expectChai(wrapper.find('li').text()).to.equal('test');
-    done();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('renders inner HTML', (done) => {
-    const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }} id={1} />);
-    expect(wrapper.html()).to.equal('<li data-notification-type="default"><u>test</u></li>');
-    done();
+  it('renders without crashing', () => {
+    shallow(<NotificationItem id={id} />);
   });
 
-  it('spy as the markAsRead property and Check that when simulating a click on the component, the spy is called with the right ID argument', (done) => {
-    const wrapper = shallow(<NotificationItem type='default' value='test' id={1} />);
-    const markAsRead = wrapper.instance().markAsRead = jest.fn();
-    wrapper.find('li').first().simulate('click');
-    markAsRead(1);
-    expect(markAsRead).toHaveBeenCalled();
-    expect(markAsRead).toHaveBeenCalledWith(1);
-    done();
+  it('renders three list items', () => {
+    const wrapper = shallow(<NotificationItem id={id} value={value} type={type} />);
+
+    expect(wrapper.find('li')).toHaveLength(1);
+    expect(wrapper.find('li').prop('data-notification-type')).toEqual('default');
+    expect(wrapper.find('li').text()).toBe('Test Notification');
+});
+
+  it('renders the correct HTML when html prop is provided', () => {
+    const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }} id={id} />);
+    expect(wrapper.html()).toBe('<li data-notification-type="default"><u>test</u></li>');
+  });
+
+  it('calls markAsRead with the correct id when clicked', () => {
+    const wrapper = shallow(<NotificationItem id={id} type={type} value={value} markAsRead={mockMarkAsRead} />);
+    wrapper.find('li').simulate('click');
+    expect(mockMarkAsRead).toHaveBeenCalledWith(id);
   });
 });
+

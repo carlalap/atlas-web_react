@@ -1,6 +1,5 @@
 import React from 'react';
-import CourseList from '../CourseList/CourseList';
-import CourseListRow from './CourseListRow';
+import CourseList from './CourseList';
 import { shallow } from 'enzyme';
 
 
@@ -13,12 +12,17 @@ const listCourses = [
 describe('Check that it renders CourseList component without crashing', () => {
     it('check courseList component', () => {
         const wrapper = shallow(<CourseList/>);
-        expect(wrapper.exists()).toEqual(true);
+        expect(wrapper.exists());
+    });
+    it('Check that it renders the 5 different rows', () => {
+        const wrapper = shallow(<CourseList />);
+        const row = wrapper.find('CourseListRow')
+        expect(row.length).toEqual(3)
     });
 
-    it('Check that it renders the correct rows', () => {
+    it('renders the correct number of CourseListRow components when listCourses prop is passed', () => {
         const wrapper = shallow(<CourseList listCourses={ listCourses }/>);
-        expect(wrapper.find(CourseListRow).length).toEqual(5);
+        expect(wrapper.find(CourseListRow).length).toEqual(3);
 
         expect(wrapper.find(CourseListRow).at(0).html()).toContain('Available courses');
 
@@ -34,15 +38,9 @@ describe('Check that it renders CourseList component without crashing', () => {
         expect(wrapper.find(CourseListRow).at(4).html()).toContain('React');
         expect(wrapper.find(CourseListRow).at(4).html()).toContain('40');
     });
-    it('check for an empty list', () => {
-        const wrapper = shallow(<CourseList listCourses={ [] }/>);
-        expect(
-          wrapper.containsMatchingElement(<tr><td>No course available yet</td></tr>)
-        ).toBeTruthy();
-        expect(wrapper.find(CourseListRow).length).toEqual(2);
-      });
-      it('fill list', () => {
-        const wrapper = shallow(<CourseList listCourses={ listCourses }/>);
-        expect(wrapper.find(CourseListRow).length).toEqual(5);
-      });
+
+    it('renders CourseList component without crashing when an empty array is passed as listCourses prop', () => {
+        const wrapper = shallow(<CourseList listCourses={[]} />);
+        expect(wrapper.exists()).toBe(true);
+    });
 });

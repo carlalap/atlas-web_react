@@ -1,12 +1,10 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { expect as expectChai } from 'chai';
+import { shallow, mount } from 'enzyme';
 import WithLogging from './WithLogging';
 import Login from '../Login/Login';
 
-
-describe('Test WithLogging HOC', () => {
-  it('should log Component is mounted on mount and Component is going to unmount on unmount with pure HTML element', () => {
+describe('Test WithLogging.js Component', () => {
+  it('console.log was called on mount and on unmount with Component when the wrapped element is pure html', (done) => {
     const WrapElement = WithLogging(() => <a></a>);
     console.log = jest.fn();
     const wrapper = mount(<WrapElement />);
