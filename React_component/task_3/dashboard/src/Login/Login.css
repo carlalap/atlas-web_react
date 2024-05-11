@@ -2,12 +2,12 @@
   --main-color: #FFF;
 }
 
-.App-body {
-    margin: 50px;
+.App {
+    margin: 40px;
     align-items: left;
-    min-height: 100vh;
+    min-height: 30vh; /* Me determina la altura del container*/
   }
   
-.App-body input {
+.App input {
     margin: 1rem;
   }

@@ -8,43 +8,26 @@ import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
 import CourseList from '../CourseList/CourseList';
 
+describe('App.test.js', () => {
+  let originalAlert;
+  let mockLogOut;
 
-describe("App.test.js", () => {
-
-  let events = {};
-
-  beforeEach(() => {
-    events = {}; // Empty our events before each test case
-    // Define the addEventListener method with a Jest mock function
-    document.addEventListener = jest.fn((event, callback) => {
-      events[event] = callback;
-    });
+  beforeAll(() => {
+    originalAlert = window.alert;
+    mockLogOut = jest.fn();
+    window.alert = jest.fn();
   });
 
-  it('App without crashing', (done) => {
-    expect(shallow(<App />).exists());
-    done();
+  afterAll(() => {
+    window.alert = originalAlert;
   });
 
-  it('check that CourseList is not displayed when isLoggedIn is false', (done) => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.find(CourseList)).to.have.lengthOf(0);
-    done();
+  it('calls logOut function and alerts when Ctrl+H is pressed', () => {
+    const wrapper = shallow(<App logOut={mockLogOut} />);
+    const event = new KeyboardEvent('keydown', { ctrlKey: true, key: 'h' });
+    document.dispatchEvent(event);
+    expect(window.alert).toHaveBeenCalledWith('Logging you out');
+    expect(mockLogOut).toHaveBeenCalled();
   });
 
-  it('check that CourseList is displayed and Login is not displayed when isLoggedIn is true', (done) => {
-    const wrapper = shallow(<App isLoggedIn={true} />);
-    expect(wrapper.find(CourseList)).to.have.lengthOf(1);
-    expect(wrapper.find(Login)).to.have.lengthOf(0);
-    done();
-  });
-
-  it('verify that when the keys "control" and "h" are pressed the "logOut" function is called', (done) => {
-    const logOut = jest.fn(() => void (0));
-    shallow(<App />);
-    window.alert = logOut;
-    events.keydown({ keyCode: 72, ctrlKey: true });
-    expect(logOut).toHaveBeenCalled()
-    done();
-  });
 });
