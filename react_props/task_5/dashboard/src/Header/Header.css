@@ -15,14 +15,14 @@
     }
   }
   
-  .App-header {
+  .header {
     min-height: 25vh;
     display: flex;
     align-items: center;
-    border-bottom: 3px #19a5eb solid;
+    /* border-bottom: 3px #19a5eb solid; */
   }
   
-  .App-header h1 {
+  .header h1 {
     margin-left: 5px;
       font-size: calc(10px + 2vmin);
     color: #3258e3ea;
