@@ -1,0 +1,37 @@
+table {
+    margin-top: 20px;
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid rgb(10, 10, 10);
+  }
+  
+  /* Style the table header */
+  td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  /* trigger available courses */
+  #CourseList thead tr:first-child {
+    text-align: center;
+  }
+  
+  /* trigger the second row */
+  #CourseList thead tr:nth-child(2) {
+    text-align: left;
+  }
+  
+  th {
+    border: 2px solid #02040e;
+  }
+  
+  /* style table borders */
+  table, td {
+    border: 1px solid #02040e;
+  }
+  
+    /* spacing between cells */
+  th, td {
+    padding: 10px;
+  }
