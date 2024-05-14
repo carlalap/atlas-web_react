@@ -6,9 +6,25 @@ import { StyleSheet, css } from 'aphrodite';
 const styles = StyleSheet.create({
   default: {
     color: 'blue',
+    marginRight: '1rem',
+    '@media (max-width: 900px)': {
+      fontSize: '20px',
+      listStyle: 'none',
+      borderBottom: '1px solid black',
+      marginBottom: '5px',
+      padding: '10px 8px'
+    },
   },
   urgent: {
     color: 'red',
+    marginRight: '1rem',
+    '@media (max-width: 900px)': {
+      fontSize: '20px',
+      listStyle: 'none',
+      borderBottom: '1px solid black',
+      marginBottom: '5px',
+      padding: '10px 8px'
+    },
   },
 });
 

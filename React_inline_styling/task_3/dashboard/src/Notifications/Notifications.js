@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
     '@media (max-width: 900px)': {
       position: 'absolute',
       top: 0,
-      left: 0,
-      right: 0,
+      left: 5,
       bottom: 0, // Full screen on small devices
       width: '100%',
       height: '100%',
@@ -61,11 +60,13 @@ const styles = StyleSheet.create({
   notificationsP: {
     margin: 0,
     marginTop: "15px",
+    fontSize: '20px',
   },
 
   notificationsUL: {
     [screenSize.small]: {
       padding: 0,
+      fontSize: '20px',
     },
   },  
 });
