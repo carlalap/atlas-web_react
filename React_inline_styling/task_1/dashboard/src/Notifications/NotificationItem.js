@@ -1,6 +1,7 @@
 // NOtificationItems file:
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Notifications.css';
 
 function NotificationItem({ id, type, value, html, markAsRead }) {
   const handleClick = () => markAsRead(id);
