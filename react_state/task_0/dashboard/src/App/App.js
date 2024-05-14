@@ -15,6 +15,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.state = {displayDrawer: false};
   }
 
   componentDidMount() {
@@ -34,8 +37,17 @@ class App extends Component {
     }
   }
 
+  handleDisplayDrawer() {
+    this.setState({displayDrawer: true});
+  }
+
+  handleHideDrawer() {
+      this.setState({displayDrawer: false});
+  }  
+
   render() {
     const { isLoggedIn } = this.props;
+    const { displayDrawer } = this.state;
 
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -54,7 +66,12 @@ class App extends Component {
         <div className={css(styles.Header)}>
           <Header />
           <div className={css(styles.menuNotifications)}>
-            <Notifications displayDrawer={isLoggedIn} listNotifications={listNotifications} />
+            <Notifications // passing new func
+             listNotifications={listNotifications}
+             displayDrawer={displayDrawer}
+             handleDisplayDrawer={this.handleDisplayDrawer}
+             handleHideDrawer={this.handleHideDrawer}         
+             />
           </div>
         </div>
 

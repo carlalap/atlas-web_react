@@ -104,7 +104,10 @@ class Notifications extends Component {
 
   // Implement shouldComponentUpdate to compare the length of listNotifications
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.listNotifications.length > nextState.prevListLength;
+    return (
+      nextProps.listNotifications.length > nextState.prevListLength ||
+      nextProps.displayDrawer !== this.props.displayDrawer
+    );
   }
 
   // Update prevListLength in componentDidUpdate
@@ -119,7 +122,7 @@ class Notifications extends Component {
   }
 
   render() {
-    const { displayDrawer, listNotifications } = this.props;
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
 
     return (
       <>
@@ -127,7 +130,7 @@ class Notifications extends Component {
         {displayDrawer ? (
             <div className={css(styles.notifications, styles.show)} style={{ position: 'relative' }}>
               {/* Notifications panel content */}
-            <p className={css(styles.notificationsP)}>
+            <p className={css(styles.notificationsP)}> 
               Here is the list of notifications
             </p>
             <ul className={css(styles.notificationsUL)}>
@@ -148,16 +151,20 @@ class Notifications extends Component {
             <button
               className={css(styles.closeButton)}
               aria-label="Close"
-              onClick={() => console.log('Close button has been clicked')}>
+              onClick={handleHideDrawer}
+              id="closeNotifications"
+              >
                 <img src={closeIcon} 
                 alt="Close"
                 style={{width: '1rem', height: '1rem'}} />
             </button>
           </div>
         ) : (
-            <div className={css(styles.menuItem)}>
+            <div onClick={handleDisplayDrawer}
+               className={css(styles.menuItem)}
+               id="menuItem">
               {/* "Your notifications" text */}
-              <p>Your notifications</p>
+              <p> Your notifications </p>
             </div>
         )}
       </>
@@ -169,12 +176,16 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   // Add proptype for listNotifications
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
 };
 
 Notifications.defaultProps = {
   displayDrawer: false, //default false
   listNotifications: [], // Default value for listNotifications
-  markAsRead: () => {}
+  markAsRead: () => {},
+  handleDisplayDrawer: () => {},
+  handleHideDrawer: () => {},
 };
 
 export default Notifications;

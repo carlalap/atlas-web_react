@@ -32,9 +32,9 @@ describe('Test Notifications.js Component', () => {
     shallow(<Notifications />);
   });
 
-  it('Displays the text "Here is the list of notifications"', () => {
+  it('Displays the text "Your notifications"', () => {
     const wrapper = shallow(<Notifications />);
-    expect(wrapper.text()).toContain('Here is the list of notifications');
+    expect(wrapper.text()).toContain('Your notifications');
   });
 
   it('Verify that when you pass a list of notifications, the component renders it correctly and with the right number of NotificationItem', () => {
@@ -75,13 +75,12 @@ describe('Test Notifications.js Component', () => {
   });
 
   // Test task 10
-  it('verify that when updating the props of the component with the same list, the component doesn’t rerender', (done) => {
+  it('verify that when updating the props of the component with the same list, the component doesn’t rerender', () => {
     const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={listNotifications} />);
     const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
     wrapper.setProps({ listNotifications: listNotificationsNoUpdated });
     expect(shouldComponentUpdate).toHaveBeenCalled();
-    expect(shouldComponentUpdate).toHaveLastReturnedWith(false);
-    done();    
+    expect(shouldComponentUpdate).toHaveLastReturnedWith(false);    
   });
 
   it('verify that when updating the props of the component with a longer list, the component does rerender', (done) => {
@@ -91,5 +90,44 @@ describe('Test Notifications.js Component', () => {
     expect(shouldComponentUpdate).toHaveBeenCalled();
     expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
     done();    
+  });
+
+  it("verify that clicking on the menu item calls handleDisplayDrawer", () => {
+    const handleDisplayDrawer = jest.fn();
+    const handleHideDrawer = jest.fn();
+
+    const wrapper = shallow(
+      <Notifications
+        handleDisplayDrawer={handleDisplayDrawer}
+        handleHideDrawer={handleHideDrawer}
+      />
+    );
+
+    wrapper.find("#menuItem").simulate("click");
+
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+    expect(handleHideDrawer).not.toHaveBeenCalled();
+
+    jest.restoreAllMocks();
+  });
+
+  it("verify that clicking on the button calls handleHideDrawer", () => {
+    const handleDisplayDrawer = jest.fn();
+    const handleHideDrawer = jest.fn();
+
+    const wrapper = shallow(
+      <Notifications
+        displayDrawer
+        handleDisplayDrawer={handleDisplayDrawer}
+        handleHideDrawer={handleHideDrawer}
+      />
+    );
+
+    wrapper.find("#closeNotifications").simulate("click");
+
+    expect(handleDisplayDrawer).not.toHaveBeenCalled();
+    expect(handleHideDrawer).toHaveBeenCalled();
+
+    jest.restoreAllMocks();
   });
 });
