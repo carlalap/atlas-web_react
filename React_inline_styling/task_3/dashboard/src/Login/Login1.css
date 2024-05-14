@@ -1,0 +1,13 @@
+:root {
+  --main-color: #FFF;
+}
+
+.App {
+    margin: 40px;
+    align-items: left;
+    min-height: 30vh; /* Me determina la altura del container*/
+  }
+  
+.App input {
+    margin: 1rem;
+  }
