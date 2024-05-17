@@ -38,9 +38,6 @@ const getAllNotificationsByUser = (userId) => {
     };
   });
   return contextArray;
-
-  // filter the notifications based on the author id
-  // return normalizedData.default.filter((notification) => notification.author.id === userId).map(notification  => notification.context);
 };
 
 export { getAllNotificationsByUser, notification };
