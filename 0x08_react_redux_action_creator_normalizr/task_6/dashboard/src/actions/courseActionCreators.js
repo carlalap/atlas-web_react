@@ -15,5 +15,5 @@ export const unSelectCourse = (index) => ({
 });
 
 // export bound action creators
-export const boundSelectCourse = bindActionCreators(selectCourse, store.dispatch);
-export const boundUnselectCourse = bindActionCreators(unselectCourse, store.dispatch);
+export const boundSelectCourse = (index) => useDispatch(selectCourse(index));
+export const boundUnselectCourse = (index) => useDispatch(unselectCourse(index));
