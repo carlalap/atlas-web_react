@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
 import { getLatestNotification } from '../utils/utils'
@@ -15,7 +15,7 @@ describe('Test Notifications.js Component', () => {
     { id: 3, type: 'urgent', html: { __html: getLatestNotification()} }
   ];
 
-  const listNotificationsUpdated = [
+  const longerListNotifications = [
     { id: 1, type: 'default', value: 'New course available' },
     { id: 2, type: 'urgent', value: 'New resume available' },
     { id: 3, type: 'urgent', html: { __html: getLatestNotification()} },
@@ -83,14 +83,16 @@ describe('Test Notifications.js Component', () => {
     expect(shouldComponentUpdate).toHaveLastReturnedWith(false);    
   });
 
-  it('verify that when updating the props of the component with a longer list, the component does rerender', (done) => {
+  it('verify that when updating the props of the component with a longer list, the component does rerender', () => {
     console.log(listNotifications);
-    const wrapper = shallow(<Notifications displayDrawer listNotifications={listNotifications} />);
-    const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
-    wrapper.setProps({ listNotifications: listNotificationsUpdated });
-    expect(shouldComponentUpdate).toHaveBeenCalled();
-    expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
-    done();    
+    const wrapper = shallow(<Notifications listNotifications={listNotifications} />);
+    // Spy on the componentDidUpdate method
+    const componentDidUpdateSpy = jest.spyOn(Notifications.prototype, 'componentDidUpdate');
+    wrapper.setProps({ listNotifications: longerListNotifications });
+    // Verify that componentDidUpdate was called    
+    expect(componentDidUpdateSpy).toHaveBeenCalled();
+    //Clear the Spy
+    componentDidUpdateSpy.mockRestore();
   });
 
   it("verify that clicking on the menu item calls handleDisplayDrawer", () => {
