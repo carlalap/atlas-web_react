@@ -277,7 +277,6 @@
 ![Responsive Design](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/c3ed54e1dba4b232adc1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240522%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240522T173338Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=508e7c21a3e71f0e0267bfdc13bc300a56ec60ffc9bd2420984b2db4cbe15198)
 
 <p><strong>Modify the component <code>Notifications</code> in <code>task_3/dashboard/src/Notifications/Notifications.js</code>:</strong></p>
-
 <ul>
 <li>When the panel is open, it should take over the entire screen</li>
 <li>There should be no padding because of the <code>ul</code> element</li>
@@ -301,7 +300,7 @@
 
 ![Responsive Design](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/e0d15ee8d2e28be1e130.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240522%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240522T173338Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=3f9e4201bfa75481cb2cb4b20fcf8571570540339dfa8760f150427bfe857b0b)
 
-  </div>
+</div>
 
   <div class="list-group">
     <!-- Task URLs -->
