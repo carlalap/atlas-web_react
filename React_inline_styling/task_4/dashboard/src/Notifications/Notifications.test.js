@@ -32,9 +32,9 @@ describe('Test Notifications.js Component', () => {
     shallow(<Notifications />);
   });
 
-  it('Displays the text "Here is the list of notifications"', () => {
+  it('Displays the text "Your notifications"', () => {
     const wrapper = shallow(<Notifications />);
-    expect(wrapper.text()).toContain('Here is the list of notifications');
+    expect(wrapper.text()).toContain('Your notifications');
   });
 
   it('Verify that when you pass a list of notifications, the component renders it correctly and with the right number of NotificationItem', () => {
