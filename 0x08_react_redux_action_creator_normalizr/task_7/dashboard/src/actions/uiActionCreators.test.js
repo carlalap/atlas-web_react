@@ -54,7 +54,7 @@ describe('async actions', () => {
         fetchMock.resetMocks();
     });
 
-    it('creates LOGIN_SUCCESS when login is successful', () => {
+    it('Verify that if the API returns the right response, login is successful', () => {
         fetch.mockResponseOnce(JSON.stringify({}));
 
         const expectedActions = [
@@ -68,17 +68,17 @@ describe('async actions', () => {
             });
     });
 
-    it('creates LOGIN_FAILURE when login fails', () => {
-        fetchMock.mockRejectOnce(new Error('fake error message'));
+    it('Verify that if the API query fails, creates LOGIN_FAILURE', () => {
+        fetchMock.mockRejectOnce(new Error('API query fails'));
 
         const expectedActions = [
-            { type: LOGIN, user: { email: 'wrongemail@example.com', password: 'wrongpassword' } },
+            { type: LOGIN, user: { email: 'test@example.com', password: 'test123' } },
             { type: LOGIN_FAILURE }
         ];
 
         const store = mockStore({});
 
-        return store.dispatch(loginRequest('wrongemail@example.com', 'wrongpassword')).then(() => {
+        return store.dispatch(loginRequest('test@example.com', 'test123')).then(() => {
                 expect(store.getActions()).toEqual(expectedActions);
             });
     });

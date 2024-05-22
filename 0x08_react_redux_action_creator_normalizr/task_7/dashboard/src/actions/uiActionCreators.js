@@ -2,9 +2,9 @@
 * Description: create four action creators functions that will send 
 * the four types we previously created
 */
-import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS } from './uiActionTypes';
-import { useDispatch } from 'redux';
-import axios from 'axios';
+import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, LOGIN_SUCCESS, LOGIN_FAILURE } from './uiActionTypes';
+import { useDispatch } from 'react-redux';
+
 
 export function login(email, password) {
   return {
@@ -14,10 +14,9 @@ export function login(email, password) {
 }
 
 /* loginSuccess action creator, that will return the previously created type */
-export function loginSuccess(user) {
+export function loginSuccess() {
   return {
     type: LOGIN_SUCCESS,
-    user
   };
 }
 
@@ -47,16 +46,20 @@ export function hideNotificationDrawer() {
 * and password as the request body.
 */
 export function loginRequest(email, password) {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(login(email, password));
-
-    axios.post('/login-succes.json', { email, password})
-      .then((response) => {
-        dispatch(loginSuccess(response.data.user));
-      })
-      .catch((error) => {
-        dispatch(loginFailure(error.message));
-      });
+    try {
+          // wait for the function execution until the promise returned by fetch is resolved.
+          const reply = await fetch('/login-success.json'); 
+          if (reply.ok) {
+              dispatch(loginSuccess()); 
+          } else {
+            // If the response is not successful, an error is thrown.
+              throw new Error('Login failed');
+          }
+      } catch (error) {
+          dispatch(loginFailure()); //the login attempt failed!?
+      }
     };
 }
 
