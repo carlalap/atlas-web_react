@@ -348,7 +348,7 @@
 <li>When the notifications panel is hovered or opened, the UI should look like the image below:</li>
 </ul>
 
-![Hoover Image](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/8d302a65b1be36662c54.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240522%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240522T173338Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6401a4816126b5a872c68327e0dea0f9cdc9f6ffaa5636ff3bbf99cbad1fb0b3)
+<p><img src="https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/medias/2019/12/8d302a65b1be36662c54.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20240522%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20240522T195518Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=bbb5013dfc82338e63b261bf127b53ca5af9202cde5b2f084962be5d6e2a6039" alt="" loading='lazy' style="" /></p>
 
   </div>
 
