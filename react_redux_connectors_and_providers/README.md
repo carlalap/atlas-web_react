@@ -360,7 +360,6 @@
 </div>
 
 <h2 class="gap">Tasks</h2>
-
     <div data-role="task21694" data-position="1" id="task-num-0">
       <div class="panel panel-default task-card " id="task-21694">
 
@@ -504,10 +503,9 @@
   <div class="panel-body">
     <span id="user_id" data-id="6138"></span>
 
-    <!-- Progress vs Score -->
-
-    <!-- Task Body -->
-    <p>In the <code>App.js</code> file:</p>
+<!-- Progress vs Score -->
+   <!-- Task Body -->
+  <p>In the <code>App.js</code> file:</p>
 
 <ul>
 <li>Update the <code>mapStateToProps</code> function to also pass to the component the value for <code>displayDrawer</code>. It should be connected to the Reducer attribute <code>isNotificationDrawerVisible</code></li>
