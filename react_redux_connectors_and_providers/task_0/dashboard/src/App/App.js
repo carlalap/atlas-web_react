@@ -10,6 +10,8 @@ import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext';
+import { connect } from "react-redux";
+
 
 const listCourses = [
   { id: 1, name: 'ES6', credit: 60 },
@@ -176,4 +178,12 @@ App.propTypes = {};
 
 App.defaultProps = {};
 
-export default App;
+
+/* function named mapStateToProps. This should connect the uiReducer
+* you created and the property isLoggedIn that your component is already using
+*/
+export const mapStateToProps = (state) => ({
+  isLoggedIn: state.ui.isLoggedIn,
+});
+
+export default connect(mapStateToProps)(App);

@@ -13,4 +13,4 @@ const AppContext = React.createContext({
     logOut: logOut
 });
 
-export {AppContext};
+export { AppContext };
