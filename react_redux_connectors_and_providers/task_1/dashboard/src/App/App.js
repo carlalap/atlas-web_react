@@ -10,6 +10,7 @@ import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext';
+import { user, logOut } from "./AppContext";
 import { connect } from "react-redux";
 import { displayNotificationDrawer, hideNotificationDrawer } from "../actions/uiActionCreators";
 
@@ -39,9 +40,9 @@ class App extends Component {
     this.state = {
         //displayDrawer: false, 
         user:  {
-        email: '',
-        password: '',
-        isLoggedIn: false
+          email: '',
+          password: '',
+          isLoggedIn: false
       },
       logOut: this.logOut,
       listNotifications: initialListNotifications,
@@ -194,7 +195,7 @@ App.propTypes = {
 */
 export const mapStateToProps = (state) => ({
   isLoggedIn: state.ui.isUserLoggedIn,
-  displayDrawer: state.ui.isNotificationDrawerVisible,
+  displayDrawer: state.ui.isNotificationDrawerVisible
 });
 
 export const mapDispatchToProps = {

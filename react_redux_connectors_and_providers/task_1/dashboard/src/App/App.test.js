@@ -50,4 +50,14 @@ describe("<App />", () => {
     const result = mapStateToProps(state.toJS());
     expect(result).toEqual({ isLoggedIn: true });
   }); 
+
+  it("mapStateToProps returns the right object from display Drawer", () => {
+    let state = fromJS({
+      ui: { isNotificationDrawerVisible: true },
+    });
+
+    const result = mapStateToProps(state.toJS());
+    expect(result).toEqual({ displayDrawer: true });
+  });
+
 });
