@@ -183,7 +183,7 @@ App.defaultProps = {};
 * you created and the property isLoggedIn that your component is already using
 */
 export const mapStateToProps = (state) => ({
-  isLoggedIn: state.ui.isLoggedIn,
+  isLoggedIn: state.ui.isUserLoggedIn,
 });
 
 export default connect(mapStateToProps)(App);

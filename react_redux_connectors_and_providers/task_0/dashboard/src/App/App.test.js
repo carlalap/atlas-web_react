@@ -33,24 +33,21 @@ describe("<App />", () => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-
-  it("mapStateToProps returns the right object from user Login", () => {
-    let state = fromJS({
-      ui: { isLoggedIn: true },
-    });
-
-    const result = mapStateToProps(state.toJS());
-
-    expect(result).toEqual({ isLoggedIn: true });
-  });
-
   it("renders without crashing", () => {
     const wrapper = mount(
       <Provider store={store}>
         <App />
       </Provider>
     );
-
     expect(wrapper.exists()).toBe(true);
   });
+
+  it("mapStateToProps returns the right object from user Login", () => {
+    let state = fromJS({
+      ui: { isUserLoggedIn: true },
+    });
+
+    const result = mapStateToProps(state.toJS());
+    expect(result).toEqual({ isLoggedIn: true });
+  }); 
 });
