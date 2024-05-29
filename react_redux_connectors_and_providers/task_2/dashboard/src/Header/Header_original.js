@@ -1,10 +1,7 @@
 // Header.js
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import logo from '../assets/atlas_logo.png';
 import { StyleSheet, css } from 'aphrodite';
-import { connect } from 'react-redux';
-import { logout } from '../actions/uiActionCreators';
 import { AppContext } from '../App/AppContext';
 
 const styles = StyleSheet.create({
@@ -12,6 +9,7 @@ const styles = StyleSheet.create({
     minHeight: '25vh',
     display: 'flex',
     alignItems: 'center',
+    /* border-bottom: 3px #19a5eb solid; */
   },
   h1: {
     marginLeft: '5px',
@@ -29,11 +27,12 @@ const styles = StyleSheet.create({
     },
   },
   welcome: {
+    // marginLeft: '10px',
     position: 'absolute',
     right: '1rem',
     top: '4rem',
-    paddingRight: '20px',
-    alignSelf: 'flex-end',
+    paddingRight: "20px",
+    alignSelf: "flex-end",
   },
   logout: {
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -50,24 +49,25 @@ const styles = StyleSheet.create({
     },
     '@media screen and (max-width: 900px)': {
       maxWidth: '60px',
+      // right: '5rem'
     },
   },
 });
 
 class Header extends Component {
+  static contextType = AppContext; // Use contextType to access the context
+
   render() {
-    const { user, logout } = this.props;
+    const { user, logOut } = this.context; // Destructure user and logOut from context
 
     return (
       <header className={css(styles.header)}>
         <img src={logo} className={css(styles.logo)} alt="logo" />
         <h1 className={css(styles.h1)}>School dashboard</h1>
-        { user && (
+        {user.isLoggedIn && (
           <div id="logoutSection" className={css(styles.welcome)}>
             Welcome {user.email}
-            <span onClick={logout} className={css(styles.logout)}>
-              logout
-            </span>
+            <span className={css(styles.logout)} onClick={logOut}>logout</span>
           </div>
         )}
       </header>
@@ -75,30 +75,4 @@ class Header extends Component {
   }
 }
 
-Header.contextType = AppContext;
-
-Header.defaultProps = {
-  user: {
-    email: '',
-    isLoggedIn: false,
-  },
-  // logout: () => {},
-};
-
-Header.propTypes = {
-  user: PropTypes.shape({
-    email: PropTypes.string,
-    isLoggedIn: PropTypes.bool,
-  }),
-  // logout: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  user: state.ui.get('user'),
-});
-
-const mapDispatchToProps = {
-  logout,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

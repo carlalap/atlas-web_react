@@ -10,7 +10,9 @@ import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import { StyleSheet, css } from 'aphrodite';
 import { AppContext } from './AppContext';
+import { user, logOut } from "./AppContext";
 import { connect } from "react-redux";
+import { displayNotificationDrawer, hideNotificationDrawer } from "../actions/uiActionCreators";
 
 
 const listCourses = [
@@ -30,18 +32,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    /* this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this); */
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
-        displayDrawer: false, 
-        user:  {
-        email: '',
-        password: '',
-        isLoggedIn: false
-      },
+      user,
       logOut: this.logOut,
       listNotifications: initialListNotifications,
     };
@@ -65,13 +62,10 @@ class App extends Component {
     };
 
     logOut() {
-      this.setState({
-        user: {
-          email: '',
-          password: '',
-          isLoggedIn: false,
-        },
-      });
+      this.setState({ user: {
+        isLoggedIn: false
+      },
+    });
     };
 
     componentDidMount() {
@@ -90,20 +84,20 @@ class App extends Component {
       }
     }
 
-    handleDisplayDrawer() {
-      this.setState({displayDrawer: true});
-    }
-
-    handleHideDrawer() {
-        this.setState({displayDrawer: false});
-    }  
-
     render() {
       // initialize state
-      const { displayDrawer, user, listNotifications } = this.state;
+      const { user, logOut, listNotifications } = this.state;
+      
+      // task4 - Modify the render function of the component to use 
+      // the functions passed within the props
+      const {
+        displayDrawer,
+        displayNotificationDrawer,
+        hideNotificationDrawer,
+      } = this.props;
 
       return (
-          <AppContext.Provider value={{ user, logOut: this.logOut}}>
+          <AppContext.Provider value={{ user, logOut }}>
               <React.Fragment>
                   <div className={css(styles.Header)}>
                   <Header />
@@ -111,8 +105,9 @@ class App extends Component {
                       <Notifications // passing new func
                       listNotifications={listNotifications}
                       displayDrawer={displayDrawer}
-                      handleDisplayDrawer={this.handleDisplayDrawer}
-                      handleHideDrawer={this.handleHideDrawer}         
+                      handleDisplayDrawer={displayNotificationDrawer}
+                      handleHideDrawer={hideNotificationDrawer}
+                      markNotificationAsRead={this.markNotificationAsRead}      
                       />
                   </div>
                   </div>
@@ -173,17 +168,34 @@ const styles = StyleSheet.create({
     },
 });
 
-// Protoypes
-App.propTypes = {};
+// Protoypes ----------------------
+// task 4 - passing functions to components props
 
-App.defaultProps = {};
+App.defaultProps = {
+  isLoggedIn: false,
+  displayDrawer: false,
+  displayNotificationDrawer: () => {},
+  hideNotificationDrawer: () => {},
+};
 
+App.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  displayDrawer: PropTypes.bool,
+  displayNotificationDrawer: PropTypes.func,
+  hideNotificationDrawer: PropTypes.func,
+};
 
 /* function named mapStateToProps. This should connect the uiReducer
 * you created and the property isLoggedIn that your component is already using
 */
 export const mapStateToProps = (state) => ({
   isLoggedIn: state.ui.isUserLoggedIn,
+  displayDrawer: state.ui.isNotificationDrawerVisible
 });
 
-export default connect(mapStateToProps)(App);
+export const mapDispatchToProps = {
+  displayNotificationDrawer,
+  hideNotificationDrawer,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

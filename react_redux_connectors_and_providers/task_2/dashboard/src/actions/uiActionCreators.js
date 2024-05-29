@@ -6,7 +6,7 @@ import { LOGIN, LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER, L
 import { useDispatch } from 'react-redux';
 
 
-export function login(email, password) {
+export const login = (email, password) => {
   return {
     type: LOGIN,
     user: { email, password }
@@ -14,14 +14,14 @@ export function login(email, password) {
 }
 
 /* loginSuccess action creator, that will return the previously created type */
-export function loginSuccess() {
+export const loginSuccess = () => {
   return {
     type: LOGIN_SUCCESS,
   };
 }
 
 /* loginFailure action creator, that will return the previously created type */
-export function loginFailure(error) {
+export const loginFailure = (error) => {
   return {
     type: LOGIN_FAILURE,
     error
@@ -29,15 +29,15 @@ export function loginFailure(error) {
 }
 
 /* logout action creator */
-export function logout() {
+export const logout = () => {
   return { type: LOGOUT };
 }
 
-export function displayNotificationDrawer() {
+export const displayNotificationDrawer = () => {
   return { type: DISPLAY_NOTIFICATION_DRAWER };
 }
 
-export function hideNotificationDrawer() {
+export const hideNotificationDrawer = () => {
   return { type: HIDE_NOTIFICATION_DRAWER };
 }
 
@@ -45,7 +45,7 @@ export function hideNotificationDrawer() {
 * then sends a POST request to the /login-success.json API with the email
 * and password as the request body.
 */
-export function loginRequest(email, password) {
+export const loginRequest = (email, password) => {
   return async (dispatch) => {
     dispatch(login(email, password));
     try {
