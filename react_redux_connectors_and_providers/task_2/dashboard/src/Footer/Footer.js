@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './Footer.css';
 import { getFullYear, getFooterCopy } from '../utils/utils';
 
-function Footer({ user }) {
+export function Footer({ user }) {
   return (
     <footer className="App-footer">
       <p>Copyright {getFullYear()} - {getFooterCopy(true)}</p>

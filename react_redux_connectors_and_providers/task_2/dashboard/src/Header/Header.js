@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 });
 
-class Header extends Component {
+export class Header extends Component {
   render() {
     const { user, logout } = this.props;
 
@@ -93,7 +93,7 @@ Header.propTypes = {
   // logout: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   user: state.ui.get('user'),
 });
 
@@ -102,3 +102,4 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export { Header as UnconnectedHeader };

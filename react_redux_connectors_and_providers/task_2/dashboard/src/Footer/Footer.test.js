@@ -1,8 +1,10 @@
+// Footer.test.js
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import Footer from './Footer';
+import { shallow } from 'enzyme';
+import { Footer } from './Footer';
 import { StyleSheetTestUtils } from 'aphrodite';
 import { AppContext } from '../App/AppContext';
+
 
 StyleSheetTestUtils.suppressStyleInjection();
 
@@ -17,22 +19,18 @@ describe('Test Footer.js component', () => {
   });
 
   it('verify that the link is not displayed when the user is logged out within the context', () => {
-    const wrapper = mount(
-      <AppContext.Provider value={{ user: { isLoggedIn: false  } }}>
-        <Footer />
-      </AppContext.Provider>
-    );
-
-    expect(wrapper.find('.contact').exists()).toBe(false);
+    const wrapper = shallow(<Footer user={null} />);
+    expect(wrapper.find("div.footer a")).toHaveLength(0);
   });
 
   it('verify the link when the user is logged in within the context', () => {
-    const wrapper = mount(
-      <AppContext.Provider value={{ user: { isLoggedIn: true } }}>
+    const contextValue = { user: { isLoggedIn: true } };
+    const wrapper = shallow(
+      <AppContext.Provider value={contextValue}>
         <Footer />
       </AppContext.Provider>
-    );
-    expect(wrapper.find(".contactus")).toHaveLength(1);
-  });
+    ).dive();
 
+    expect(wrapper.find('.contactus')).toHaveLength(1);
+  });
 });

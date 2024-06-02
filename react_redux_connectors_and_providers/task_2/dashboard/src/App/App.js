@@ -26,7 +26,7 @@ const initialListNotifications = [
   { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong> - complete by EOD' } }
 ];
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.handleKeyDown = this.handleKeyDown.bind(this);
@@ -168,7 +168,7 @@ App.propTypes = {
   logout: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   isLoggedIn: state.ui.get('isUserLoggedIn'),
   displayDrawer: state.ui.get('isNotificationDrawerVisible'),
   user: state.ui.get('user'),
