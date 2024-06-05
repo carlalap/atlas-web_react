@@ -26,7 +26,73 @@ const bounceAnimation = {
 }
 
 const styles = StyleSheet.create({
-    // ... (rest of the styles remain the same)
+    menuItem: {
+      fontFamily: 'Arial, Helvetica, sans-serif',
+      '@media (max-width: 900px)': {
+        position: 'absolute',
+        right: '1rem',
+        top: '0',
+        backgroundColor: '#fff8f8', // Set background color
+        cursor: 'pointer', // Show pointer cursor
+      },
+        ':hover': {
+            animationName: [opacityAnimation, bounceAnimation], // Apply animations
+            animationDuration: '1s, 0.5s', // Duration for opacity change and bouncing effect
+            animationIterationCount: '3, 3', // Repeat animations 3 times
+            animationTimingFunction: 'ease, ease-in-out',
+        },
+      },
+
+    closeButton: {
+      position: 'absolute',
+      top: '0',
+      right: '0',
+      margin: '1rem',
+      background: 'transparent',
+      border: 'none',
+      cursor: 'pointer',
+      [screenSize.small]: {
+      right: '2rem',
+      },
+    },
+  
+  notifications: {
+    backgroundColor: '#FFF',
+    border: '2px #6A7AC0 dashed',
+    padding: '1rem',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    width: '100%',
+    marginBottom: '5px',
+    marginRight: '1rem',
+    display: 'none',
+    '@media (max-width: 900px)': {
+      position: 'absolute',
+      top: 0,
+      left: 5,
+      bottom: 0, // Full screen on small devices
+      width: '100%',
+      height: '100%',
+      Index: '998',
+      border: 'none',
+    },
+  },
+  
+  show: {
+    display: 'block',
+  },
+
+  notificationsP: {
+    margin: 0,
+    marginTop: "15px",
+    fontSize: '20px',
+  },
+
+  notificationsUL: {
+    [screenSize.small]: {
+      padding: 0,
+      fontSize: '20px',
+    },
+  },  
 });
 
 class Notifications extends Component {

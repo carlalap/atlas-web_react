@@ -1,4 +1,4 @@
-// Notifications.test.js
+// notifications.test.js
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Notifications from './Notifications';
@@ -138,5 +138,23 @@ describe('Test Notifications.js Component', () => {
     wrapper.find('[id="closeNotifications"]').simulate('click');
 
     expect(handleHideDrawer).toHaveBeenCalled();
+  });
+
+  it('calls markNotificationAsRead when clicking on the markAsRead button', () => {
+    const markNotificationAsRead = jest.fn();
+    const handleDisplayDrawer = jest.fn();
+    const handleHideDrawer = jest.fn();
+
+    const wrapper = shallow(
+      <Notifications 
+        handleHideDrawer={handleHideDrawer} 
+        handleDisplayDrawer={handleDisplayDrawer}
+        listNotifications={listNotifications}
+        displayDrawer={true}
+        markNotificationAsRead={markNotificationAsRead}
+      />);
+    wrapper.find('[id="markAsRead"]').simulate('click');
+
+    expect(markNotificationAsRead).toHaveBeenCalledTimes(1);
   });
 });

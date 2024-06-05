@@ -5,7 +5,8 @@ import closeIcon from '../assets/close-icon.png';
 import PropTypes from 'prop-types';
 import { StyleSheet, css } from 'aphrodite';
 import NotificationItem from './NotificationItem';
-import { fetchNotifications } from '../actions/notificationActionCreators'; // Import the fetchNotifications action
+import { fetchNotifications, markNotificationAsRead, setNotificationFilter } from '../actions/notificationActionCreators'; // Import the setNotificationFilter action creator
+import { getUnreadNotificationsByType } from '../selectors/notificationSelectors'; // Import the new selector getUnreadNotificationsByType
 
 const screenSize = {
   small: "@media screen and (max-width: 900px)",
@@ -98,17 +99,16 @@ class Notifications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      prevListLength: 0, // Store the length of the previous listNotifications
+      prevListLength: 0,
     };
     this.markAsRead = this.markAsRead.bind(this);
+    this.handleFilterChange = this.handleFilterChange.bind(this);
   }
 
-  // Call fetchNotifications in componentDidMount
   componentDidMount() {
     this.props.fetchNotifications();
   }
 
-  // Implement shouldComponentUpdate to compare the length of listNotifications
   shouldComponentUpdate(nextProps) {
     return (
       nextProps.listNotifications.length > this.props.listNotifications.length ||
@@ -116,7 +116,6 @@ class Notifications extends Component {
     );
   }
 
-  // Update prevListLength in componentDidUpdate
   componentDidUpdate(prevProps) {
     if (prevProps.listNotifications.length !== this.props.listNotifications.length) {
       this.setState({ prevListLength: prevProps.listNotifications.length });
@@ -128,18 +127,25 @@ class Notifications extends Component {
     this.props.markNotificationAsRead(id);
   }
 
+  handleFilterChange(filter) {
+    this.props.setNotificationFilter(filter);
+  }
+
   render() {
-    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer, markNotificationAsRead } = this.props;
+    const { displayDrawer, listNotifications, handleDisplayDrawer, handleHideDrawer } = this.props;
 
     return (
       <>
-        {/* Conditional rendering based on displayDrawer for "Your notifications" text */}
         {displayDrawer ? (
-            <div className={css(styles.notifications, styles.show)} style={{ position: 'relative' }}>
-              {/* Notifications panel content */}
-            <p className={css(styles.notificationsP)}> 
-              Here is the list of notifications
-            </p>
+          <div className={css(styles.notifications, styles.show)} style={{ position: 'relative' }}>
+            <p className={css(styles.notificationsP)}>Here is the list of notifications</p>
+            {/* Add buttons to change filter */}
+            <button onClick={() => this.handleFilterChange('URGENT')} className={css(styles.filterButton)}>
+              ‼️
+            </button>
+            <button onClick={() => this.handleFilterChange('DEFAULT')} className={css(styles.filterButton)}>
+              ?
+            </button>
             <ul className={css(styles.notificationsUL)}>
               {listNotifications.length === 0 ? (
                 <li>No new notification for now</li>
@@ -150,29 +156,19 @@ class Notifications extends Component {
                     type={notification.type}
                     value={notification.value}
                     html={notification.html}
-                    markAsRead={() => markNotificationAsRead(notification.id)}
+                    markAsRead={() => this.markAsRead(notification.id)}
                   />
                 ))
               )}
             </ul>
-            <button
-              className={css(styles.closeButton)}
-              aria-label="Close"
-              onClick={handleHideDrawer}
-              id="closeNotifications"
-              >
-                <img src={closeIcon} 
-                alt="Close"
-                style={{width: '1rem', height: '1rem'}} />
+            <button className={css(styles.closeButton)} aria-label="Close" onClick={handleHideDrawer} id="closeNotifications">
+              <img src={closeIcon} alt="Close" style={{ width: '1rem', height: '1rem' }} />
             </button>
           </div>
         ) : (
-            <div onClick={handleDisplayDrawer}
-               className={css(styles.menuItem)}
-               id="menuItem">
-              {/* "Your notifications" text */}
-              <p> Your notifications </p>
-            </div>
+          <div onClick={handleDisplayDrawer} className={css(styles.menuItem)} id="menuItem">
+            <p>Your notifications</p>
+          </div>
         )}
       </>
     );
@@ -181,17 +177,17 @@ class Notifications extends Component {
 
 Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
-  // Add proptype for listNotifications
   listNotifications: PropTypes.arrayOf(NotificationItemShape),
   handleDisplayDrawer: PropTypes.func,
   handleHideDrawer: PropTypes.func,
   markNotificationAsRead: PropTypes.func,
   fetchNotifications: PropTypes.func.isRequired,
+  setNotificationFilter: PropTypes.func.isRequired, // Add setNotificationFilter to propTypes
 };
 
 Notifications.defaultProps = {
-  displayDrawer: false, //default false
-  listNotifications: [], // Default value for listNotifications
+  displayDrawer: false,
+  listNotifications: [],
   markAsRead: () => {},
   handleDisplayDrawer: () => {},
   handleHideDrawer: () => {},
@@ -199,12 +195,16 @@ Notifications.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    listNotifications: state.notifications.getIn(['notifications', 'entities', 'notifications']).toList().toJS(),
+    listNotifications: getUnreadNotificationsByType(state), // Use the new selector getUnreadNotificationsByType
   };
 };
 
-const mapDispatchToProps = {
-  fetchNotifications,
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchNotifications: () => dispatch(fetchNotifications()),
+    markNotificationAsRead: id => dispatch(markNotificationAsRead(id)),
+    setNotificationFilter: filter => dispatch(setNotificationFilter(filter)), // Map the setNotificationFilter action creator
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
